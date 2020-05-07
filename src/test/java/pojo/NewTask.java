@@ -7,67 +7,67 @@ public class NewTask {
     @SerializedName("content")
     private String content;
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public void setProjectId(int projectId) {
-		this.projectId = projectId;
-	}
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
+    }
 
-	public void setSectionId(int sectionId) {
-		this.sectionId = sectionId;
-	}
+    public void setSectionId(Integer sectionId) {
+        this.sectionId = sectionId;
+    }
 
-	public void setParent(int parent) {
-		this.parent = parent;
-	}
+    public void setParent(Integer parent) {
+        this.parent = parent;
+    }
 
-	public void setOrder(int order) {
-		this.order = order;
-	}
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
 
-	public void setLabelsIds(int[] labelsIds) {
-		this.labelsIds = labelsIds;
-	}
+    public void setLabelsIds(Integer[] labelsIds) {
+        this.labelsIds = labelsIds;
+    }
 
-	public void setPriority(int priority) {
-		this.priority = priority;
-	}
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
 
-	public void setDueString(String dueString) {
-		this.dueString = dueString;
-	}
+    public void setDueString(String dueString) {
+        this.dueString = dueString;
+    }
 
-	public void setDueDate(String dueDate) {
-		this.dueDate = dueDate;
-	}
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
 
-	public void setDueDateTime(String dueDateTime) {
-		this.dueDateTime = dueDateTime;
-	}
+    public void setDueDateTime(String dueDateTime) {
+        this.dueDateTime = dueDateTime;
+    }
 
-	public void setDueLang(String dueLang) {
-		this.dueLang = dueLang;
-	}
+    public void setDueLang(String dueLang) {
+        this.dueLang = dueLang;
+    }
 
-	@SerializedName("project")
-    private int projectId;
+    @SerializedName("project")
+    private Integer projectId;
 
     @SerializedName("section_id")
-    private int sectionId;
+    private Integer sectionId;
 
     @SerializedName("parent")
-    private int parent;
+    private Integer parent;
 
     @SerializedName("order")
-    private int order;
+    private Integer order;
 
     @SerializedName("labels_ids")
-    private int[] labelsIds;
+    private Integer[] labelsIds;
 
     @SerializedName("priority")
-    private int priority;
+    private Integer priority;
 
     @SerializedName("due_string")
     private String dueString;

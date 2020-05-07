@@ -1,7 +1,8 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import org.json.JSONObject;
+import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pojo.NewTask;
@@ -20,28 +21,28 @@ public class CreateNewTaskTest {
     private final String postTask = "/tasks";
     private String defaultContent = "default content for tasks ";
 
+    public RequestSpecification REQUEST;
+
     @BeforeEach
     public void setup() {
         baseURI = basePath;
         String date = new SimpleDateFormat("dd-MM-yyyy-HH:mm:ss").format(new Date());
         defaultContent = defaultContent + date;
+        REQUEST = RestAssured.given().header("Authorization", "Bearer " + bearerToken).contentType(ContentType.JSON + "\r\n");
     }
 
     @Test
     public void createTaskOnlyContent() {
         NewTask task = new NewTask();
         task.setContent(defaultContent);
-        task.setPriority(1);
-        JSONObject jsonObject = new JSONObject(task);
+        Gson gson = new Gson();
+        String jsonObject = gson.toJson(task);
 
-        given()
-                .header("Authorization", "Bearer " + bearerToken)
-                .contentType(ContentType.JSON + "\r\n")
-                .body(jsonObject.toString())
+        REQUEST.given()
+                .body(jsonObject)
                 .when()
                 .post(postTask)
-                .peek()
-                .then().log().all().extract().response();
+                .then().statusCode(SC_OK);
     }
 
     @Test
@@ -60,9 +61,7 @@ public class CreateNewTaskTest {
                 .build();
         Gson gson = new GsonBuilder().create();
         String json = gson.toJson(newTaskBuilder);
-        given()
-                .header("Authorization", "Bearer " + bearerToken)
-                .contentType(ContentType.JSON + "\r\n")
+        REQUEST.given()
                 .body(json)
                 .when()
                 .post(postTask)
@@ -77,9 +76,7 @@ public class CreateNewTaskTest {
         Gson gson = new GsonBuilder().create();
         String json = gson.toJson(newTaskBuilder);
 
-        String response = given()
-                .header("Authorization", "Bearer " + bearerToken)
-                .contentType(ContentType.JSON + "\r\n")
+        String response = REQUEST.given()
                 .body(json)
                 .when()
                 .post(postTask)
@@ -91,9 +88,7 @@ public class CreateNewTaskTest {
     void createTaskWithoutContentField() {
         String json = ("{\"project_id\": 1}");
 
-        String response = given()
-                .header("Authorization", "Bearer " + bearerToken)
-                .contentType(ContentType.JSON + "\r\n")
+        String response = REQUEST.given()
                 .body(json)
                 .when()
                 .post(postTask)
@@ -108,9 +103,7 @@ public class CreateNewTaskTest {
                 .build();
         Gson gson = new GsonBuilder().create();
         String json = gson.toJson(newTaskBuilder);
-        given()
-                .header("Authorization", "Bearer " + bearerToken)
-                .contentType(ContentType.JSON + "\r\n")
+        REQUEST.given()
                 .body(json)
                 .when()
                 .post(postTask)
